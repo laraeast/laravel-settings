@@ -34,7 +34,7 @@
         },
         "laravel": {
             "providers": [
-                "Laraeast\\LaravelSettings\\Providers\\ServiceProvider"
+                "Laraeast\\LaravelSettings\\Providers\\SettingsServiceProvider"
             ],
             "aliases": {
                 "Setting": "Laraeast\\LaravelSettings\\Facades\\Setting"
