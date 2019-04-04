@@ -10,9 +10,7 @@
         }
     ],
     "require": {
-        "illuminate/support": "5.6.*|5.7.*|5.8.*",
-        "illuminate/filesystem": "5.6.*|5.7.*|5.8.*",
-        "illuminate/database": "5.6.*|5.7.*|5.8.*"
+        "laravel/framework": "5.6.*|5.7.*|5.8.*"
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",
@@ -25,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Laraeast\\LaravelSettings\\Tests\\": "tests/"
         }
     },
     "extra": {

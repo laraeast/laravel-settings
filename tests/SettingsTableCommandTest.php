@@ -3,7 +3,6 @@
 namespace Laraeast\LaravelSettings\Tests;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Composer;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
