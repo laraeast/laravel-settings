@@ -48,7 +48,7 @@ class DatabaseSettingsHandler implements SettingsStore
      */
     public function set($key, $value = null)
     {
-        Cache::forget("settings_{$this->locale}");
+        Cache::forget("settings");
 
         $this->supportLocaledKey($key);
 
@@ -114,7 +114,7 @@ class DatabaseSettingsHandler implements SettingsStore
             $expireSeconds = $this->app['config']->get('laravel-settings.cache_expire');
 
             $this->settings = Cache::remember(
-                "settings_{$this->locale}",
+                "settings",
                 Carbon::now()->addSeconds($expireSeconds),
                 function () use ($model) {
                     return $model::get();
@@ -160,7 +160,7 @@ class DatabaseSettingsHandler implements SettingsStore
     public function delete($key)
     {
         if ($this->instance($key)) {
-            Cache::forget("settings_{$this->locale}");
+            Cache::forget("settings");
 
             $this->instance($key)->delete();
 
