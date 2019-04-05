@@ -2,7 +2,9 @@
 
 namespace Laraeast\LaravelSettings;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Cache;
 use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Contracts\SettingsStore;
 
@@ -41,12 +43,18 @@ class DatabaseSettingsHandler implements SettingsStore
      * Set a new settings item.
      *
      * @param $key
-     * @param $value
-     * @return $this
+     * @param null $value
+     * @return \Laraeast\LaravelSettings\Models\Setting
      */
-    public function set($key, $value)
+    public function set($key, $value = null)
     {
-        Setting::updateOrCreate([
+        Cache::forget("settings_{$this->locale}");
+
+        $this->supportLocaledKey($key);
+
+        $model = $this->getModelClassName();
+
+        $model::updateOrCreate([
             'key' => $key,
             'locale' => $this->locale,
         ], [
@@ -57,7 +65,11 @@ class DatabaseSettingsHandler implements SettingsStore
 
         $this->fetchSettings();
 
-        return $this;
+        $value = $this->instance($key);
+
+        $this->locale = null;
+
+        return $value;
     }
 
     /**
@@ -96,10 +108,21 @@ class DatabaseSettingsHandler implements SettingsStore
      */
     private function fetchSettings()
     {
-        $this->settings = Setting::where(function ($query) {
-            $query->where('locale', $this->locale ?: $this->app->getLocale());
-            $query->orWhereNull('locale');
-        })->get();
+        $model = $this->getModelClassName();
+
+        if ($this->app['config']->get('laravel-settings.use_cache')) {
+            $expireSeconds = $this->app['config']->get('laravel-settings.cache_expire');
+
+            $this->settings = Cache::remember(
+                "settings_{$this->locale}",
+                Carbon::now()->addSeconds($expireSeconds),
+                function () use ($model) {
+                    return $model::get();
+                }
+            );
+        } else {
+            $this->settings = $model::get();
+        }
     }
 
     /**
@@ -111,7 +134,64 @@ class DatabaseSettingsHandler implements SettingsStore
      */
     public function instance($key, $default = null)
     {
+        $this->supportLocaledKey($key);
+
         return $this->settings->where('key', $key)->where('locale', $this->locale)->first()
             ?: $default;
+    }
+
+    /**
+     * Determine whether the key is already exists.
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return ! ! $this->instance($key);
+    }
+
+    /**
+     * Remove the given key from storage.
+     *
+     * @param string $key
+     * @return $this
+     */
+    public function forget($key)
+    {
+        if ($this->instance($key)) {
+            Cache::forget("settings_{$this->locale}");
+
+            $this->instance($key)->delete();
+
+            $this->fetchSettings();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Update locale if the key has the language.
+     *
+     * @param $key
+     */
+    private function supportLocaledKey(&$key)
+    {
+        if (strpos($key, ':') !== false) {
+            $this->locale(explode(':', $key)[1]);
+            $key = explode(':', $key)[0];
+        }
+    }
+
+    /**
+     * The model class name.
+     *
+     * @return string
+     */
+    private function getModelClassName()
+    {
+        $model = $this->app['config']->get('laravel-settings.model_class');
+
+        return $model ?: Setting::class;
     }
 }

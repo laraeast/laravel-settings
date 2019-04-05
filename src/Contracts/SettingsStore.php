@@ -17,10 +17,10 @@ interface SettingsStore
      * Set a new settings item.
      *
      * @param $key
-     * @param $value
+     * @param null $value
      * @return $this
      */
-    public function set($key, $value);
+    public function set($key, $value = null);
 
     /**
      * Get the given item.

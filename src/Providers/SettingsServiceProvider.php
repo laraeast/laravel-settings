@@ -34,7 +34,7 @@ class SettingsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'./../../config/laravel-settings.php' => config_path('laravel-settings.php')
+                __DIR__.'/../../config/laravel-settings.php' => config_path('laravel-settings.php')
             ], 'settings:config');
 
             $this->commands([
