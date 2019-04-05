@@ -1,41 +1,25 @@
-dist: xenial
+sudo: required
+
 language: php
 
+php:
+  - 7.2
+  - 7.3
+
 env:
-  global:
-    - SETUP=stable
-
-matrix:
-  fast_finish: true
-  include:
-    - php: 7.1
-    - php: 7.1
-      env: SETUP=lowest
-    - php: 7.2
-    - php: 7.2
-      env: SETUP=lowest
-    - php: 7.3
-    - php: 7.3
-      env: SETUP=lowest
-
-cache:
-  directories:
-    - $HOME/.composer/cache
-
-services:
-  - memcached
-  - redis-server
-  - mysql
+  matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
+    - COMPOSER_FLAGS=""
 
 before_install:
-  - phpenv config-rm xdebug.ini || true
-  - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - printf "\n" | pecl install -f redis
+  - sudo apt-get update
   - travis_retry composer self-update
-  - mysql -e 'CREATE DATABASE forge;'
 
 install:
-  - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
-  - if [[ $SETUP = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+  - travis_retry composer update --prefer-source $COMPOSER_FLAGS
+script:
+  - vendor/bin/phpunit
 
-script: vendor/bin/phpunit
+branches:
+  only:
+    - master
