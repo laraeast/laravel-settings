@@ -1,5 +1,9 @@
-[![Latest Version on Packagist][ico-version]][link-packagist]
-![Total Downloads][ico-downloads]
+<p align="center">
+<a href="https://travis-ci.org/laraeast/laravel-settings"><img src="https://travis-ci.org/laraeast/laravel-settings.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/license.svg" alt="License"></a>
+</p>
  
 # Persistent Settings Manager for Laravel
  
@@ -119,12 +123,3 @@ $this->app['settings.manager']->extend('file', function () {
 	return new SettingsFileDriverHandler();
 });
 ```
-[ico-version]: https://img.shields.io/packagist/v/laraeast/laravel-settings.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
- 
-[ico-downloads]: https://img.shields.io/packagist/dt/laraeast/laravel-settings.svg?style=flat-square
- 
-[link-packagist]: https://packagist.org/packages/unisharp/categorizable
-[link-travis]: https://travis-ci.org/UniSharp/categorizable
-[link-scrutinizer]: https://scrutinizer-ci.com/g/UniSharp/categorizable/code-structure
-[link-author]: https://github.com/ahmed-aliraqi
