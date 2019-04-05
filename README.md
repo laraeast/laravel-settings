@@ -134,3 +134,16 @@ $this->app['settings.manager']->extend('file', function () {
 	return new SettingsFileDriverHandler();
 });
 ```
+> Note : your custom driver `SettingsFileDriverHandler` should implements `Laraeast\LaravelSettings\Contracts\SettingsStore` contract
+```
+<?php
+
+namespace App\LaravelSettings;
+
+use Laraeast\LaravelSettings\Contracts\SettingsStore;
+
+class SettingsFileDriverHandler implements SettingsStore
+{
+    ...
+}
+```
