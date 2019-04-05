@@ -84,8 +84,8 @@ class LaravelSettingsUnitTest extends TestCase
         Settings::locale('ar')->set('language', 'Arabic');
         $this->assertEquals(Settings::locale('en')->get('language'), 'English');
         $this->assertEquals(Settings::locale('ar')->get('language'), 'Arabic');
-        Settings::locale('en')->forget('language');
-        Settings::locale('ar')->forget('language');
+        Settings::locale('en')->delete('language');
+        Settings::locale('ar')->delete('language');
         Settings::set('language:en', 'English');
         Settings::set('language:ar', 'Arabic');
         $this->assertEquals(Settings::locale('en')->get('language'), 'English');
@@ -111,7 +111,7 @@ class LaravelSettingsUnitTest extends TestCase
     {
         Settings::set('name', 'Ahmed');
         $this->assertTrue(Settings::has('name'));
-        Settings::forget('name');
+        Settings::delete('name');
         $this->assertFalse(Settings::has('name'));
         $this->assertDatabaseMissing('settings', [
             'key' => 'name',
@@ -120,14 +120,14 @@ class LaravelSettingsUnitTest extends TestCase
         Settings::locale('ar')->set('name', 'احمد');
         $this->assertTrue(Settings::locale('en')->has('name'));
         $this->assertTrue(Settings::locale('ar')->has('name'));
-        Settings::locale('en')->forget('name');
+        Settings::locale('en')->delete('name');
         $this->assertFalse(Settings::locale('en')->has('name'));
         $this->assertTrue(Settings::locale('ar')->has('name'));
         $this->assertDatabaseMissing('settings', [
             'key' => 'name',
             'locale' => 'en',
         ]);
-        Settings::forget('name:ar');
+        Settings::delete('name:ar');
         $this->assertFalse(Settings::locale('ar')->has('name'));
         $this->assertFalse(Settings::has('name:ar'));
         $this->assertDatabaseMissing('settings', [

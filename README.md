@@ -82,13 +82,13 @@ Settings::locale('en')->has('name');
 Settings::has('name:en');
 // check the key exists by language, return boolean
  
-Settings::forget('name');
+Settings::delete('name');
 // delete the setting by key
  
-Settings::locale('en')->forget('name');
+Settings::locale('en')->delete('name');
 // delete the setting by key and language
  
-Settings::forget('name:en');
+Settings::delete('name:en');
 // delete the setting by key and language
 ```
  
@@ -118,7 +118,7 @@ Settings::locale('ar')->get('title');
 // return return 'عنوان الموقع';
 
 Settings::locale('ar')->has('title') // bool
-Settings::locale('ar')->forget('title') 
+Settings::locale('ar')->delete('title') 
 
 App::setLocale('en');
 

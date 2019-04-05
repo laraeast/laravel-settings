@@ -152,12 +152,12 @@ class DatabaseSettingsHandler implements SettingsStore
     }
 
     /**
-     * Remove the given key from storage.
+     * Delete the given key from storage.
      *
      * @param string $key
      * @return $this
      */
-    public function forget($key)
+    public function delete($key)
     {
         if ($this->instance($key)) {
             Cache::forget("settings_{$this->locale}");

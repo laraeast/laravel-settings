@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Laraeast\LaravelSettings\Models\Setting set($key, $value)
  * @method static mixed get($key, $default = null)
  * @method static bool has($key)
- * @method static \Laraeast\LaravelSettings\Contracts\SettingsStore forget($key)
+ * @method static \Laraeast\LaravelSettings\Contracts\SettingsStore delete($key)
  * @method static mixed instance($key, $default = null)
  */
 class Settings extends Facade
