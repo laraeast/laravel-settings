@@ -42,10 +42,7 @@
 Settings::get('name', 'Computer');
 // get setting value with key 'name'
 // return 'Computer' if the key does not exists
- 
-Settings::all();
-// get all settings
- 
+
 Settings::locale('en')->get('name', 'Computer');
 // get setting value with key and language
  
