@@ -3,8 +3,8 @@
 namespace Laraeast\LaravelSettings;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Foundation\Application;
 use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Contracts\SettingsStore;
 
