@@ -18,7 +18,7 @@ class LaravelSettingsUnitTest extends TestCase
 
         $this->loadLaravelMigrations(['--database' => 'testbench']);
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     /**
