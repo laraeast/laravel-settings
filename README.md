@@ -1,5 +1,5 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
+![Total Downloads][ico-downloads]
  
 # Persistent Settings Manager for Laravel
  
@@ -122,8 +122,12 @@ $this->app['settings.manager']->extend('file', function () {
 	return new SettingsFileDriverHandler();
 });
 ```
-
 [ico-version]: https://img.shields.io/packagist/v/laraeast/laravel-settings.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
  
 [ico-downloads]: https://img.shields.io/packagist/dt/laraeast/laravel-settings.svg?style=flat-square
+ 
+[link-packagist]: https://packagist.org/packages/unisharp/categorizable
+[link-travis]: https://travis-ci.org/UniSharp/categorizable
+[link-scrutinizer]: https://scrutinizer-ci.com/g/UniSharp/categorizable/code-structure
+[link-author]: https://github.com/ahmed-aliraqi
