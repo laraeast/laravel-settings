@@ -30,4 +30,37 @@ interface SettingsStore
      * @return mixed
      */
     public function get($key, $default = null);
+
+    /**
+     * Get the settings row.
+     *
+     * @param $key
+     * @param null $default
+     * @return mixed
+     */
+    public function instance($key, $default = null);
+
+    /**
+     * Delete the given key from storage.
+     *
+     * @param string $key
+     * @return $this
+     */
+    public function delete($key);
+
+    /**
+     * Determine whether the key is already exists.
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function has($key);
+
+    /**
+     * Set the settings locale.
+     *
+     * @param null $locale
+     * @return $this
+     */
+    public function locale($locale);
 }
