@@ -35,7 +35,7 @@
                 "Laraeast\\LaravelSettings\\Providers\\SettingsServiceProvider"
             ],
             "aliases": {
-                "Settings": "Laraeast\\LaravelSettings\\Facades\\Setting"
+                "Settings": "Laraeast\\LaravelSettings\\Facades\\Settings"
             }
         }
     }
