@@ -1,4 +1,5 @@
 <p align="center">
+	<a href="https://github.styleci.io/repos/179407016"><img src="https://github.styleci.io/repos/179407016/shield?branch=master" alt="StyleCI"></a>
 	<a href="https://travis-ci.org/laraeast/laravel-settings">
 		<img src="https://travis-ci.org/laraeast/laravel-settings.svg?branch=master" alt="Travis Build Status">
 	</a>
