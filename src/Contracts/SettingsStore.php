@@ -18,6 +18,7 @@ interface SettingsStore
      *
      * @param $key
      * @param null $value
+     *
      * @return $this
      */
     public function set($key, $value = null);
@@ -27,6 +28,7 @@ interface SettingsStore
      *
      * @param $key
      * @param null $default
+     *
      * @return mixed
      */
     public function get($key, $default = null);
@@ -36,6 +38,7 @@ interface SettingsStore
      *
      * @param $key
      * @param null $default
+     *
      * @return mixed
      */
     public function instance($key, $default = null);
@@ -44,6 +47,7 @@ interface SettingsStore
      * Delete the given key from storage.
      *
      * @param string $key
+     *
      * @return $this
      */
     public function delete($key);
@@ -52,6 +56,7 @@ interface SettingsStore
      * Determine whether the key is already exists.
      *
      * @param string $key
+     *
      * @return bool
      */
     public function has($key);
@@ -60,6 +65,7 @@ interface SettingsStore
      * Set the settings locale.
      *
      * @param null $locale
+     *
      * @return $this
      */
     public function locale($locale);

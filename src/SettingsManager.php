@@ -29,7 +29,8 @@ class SettingsManager extends Manager
     /**
      * Set the default driver name.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function setDefaultDriver($name)
