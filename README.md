@@ -21,7 +21,7 @@
  
  * Simple key-value storage
  * Localization supported.
- * Localization using [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable) Structure
+ * Localization using [Astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) Structure
  
 ## Installation
  
