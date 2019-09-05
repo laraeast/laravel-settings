@@ -2,12 +2,12 @@
 
 namespace Laraeast\LaravelSettings\Tests;
 
-use Orchestra\Testbench\TestCase;
-use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Facades\Settings;
+use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Providers\SettingsServiceProvider;
+use Orchestra\Testbench\TestCase;
 
-class LaravelSettingsUnitTest extends TestCase
+class LaravelSettingsTest extends TestCase
 {
     /**
      * Setup the test environment.
@@ -22,9 +22,10 @@ class LaravelSettingsUnitTest extends TestCase
     }
 
     /**
-     * Load package service provider
+     * Load package service provider.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -33,9 +34,10 @@ class LaravelSettingsUnitTest extends TestCase
     }
 
     /**
-     * Load package alias
+     * Load package alias.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return array
      */
     protected function getPackageAliases($app)
@@ -48,7 +50,8 @@ class LaravelSettingsUnitTest extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -56,9 +59,9 @@ class LaravelSettingsUnitTest extends TestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
     }
 
@@ -124,14 +127,14 @@ class LaravelSettingsUnitTest extends TestCase
         $this->assertFalse(Settings::locale('en')->has('name'));
         $this->assertTrue(Settings::locale('ar')->has('name'));
         $this->assertDatabaseMissing('settings', [
-            'key' => 'name',
+            'key'    => 'name',
             'locale' => 'en',
         ]);
         Settings::delete('name:ar');
         $this->assertFalse(Settings::locale('ar')->has('name'));
         $this->assertFalse(Settings::has('name:ar'));
         $this->assertDatabaseMissing('settings', [
-            'key' => 'name',
+            'key'    => 'name',
             'locale' => 'ar',
         ]);
     }

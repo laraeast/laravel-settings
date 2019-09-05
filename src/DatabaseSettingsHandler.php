@@ -3,10 +3,10 @@
 namespace Laraeast\LaravelSettings;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\Application;
-use Laraeast\LaravelSettings\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 use Laraeast\LaravelSettings\Contracts\SettingsStore;
+use Laraeast\LaravelSettings\Models\Setting;
 
 class DatabaseSettingsHandler implements SettingsStore
 {
@@ -44,23 +44,24 @@ class DatabaseSettingsHandler implements SettingsStore
      *
      * @param $key
      * @param null $value
+     *
      * @return \Laraeast\LaravelSettings\Models\Setting
      */
     public function set($key, $value = null)
     {
-        Cache::forget("settings");
+        Cache::forget('settings');
 
         $this->supportLocaledKey($key);
 
         $model = $this->getModelClassName();
 
         $model::updateOrCreate([
-            'key' => $key,
+            'key'    => $key,
             'locale' => $this->locale,
         ], [
-            'key' => $key,
+            'key'    => $key,
             'locale' => $this->locale,
-            'value' => serialize($value),
+            'value'  => serialize($value),
         ]);
 
         $this->fetchSettings();
@@ -76,6 +77,7 @@ class DatabaseSettingsHandler implements SettingsStore
      * Set the settings locale.
      *
      * @param null $locale
+     *
      * @return $this
      */
     public function locale($locale = null)
@@ -90,6 +92,7 @@ class DatabaseSettingsHandler implements SettingsStore
      *
      * @param $key
      * @param null $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -114,7 +117,7 @@ class DatabaseSettingsHandler implements SettingsStore
             $expireSeconds = $this->app['config']->get('laravel-settings.cache_expire');
 
             $this->settings = Cache::remember(
-                "settings",
+                'settings',
                 Carbon::now()->addSeconds($expireSeconds),
                 function () use ($model) {
                     return $model::get();
@@ -130,6 +133,7 @@ class DatabaseSettingsHandler implements SettingsStore
      *
      * @param $key
      * @param null $default
+     *
      * @return mixed
      */
     public function instance($key, $default = null)
@@ -144,23 +148,25 @@ class DatabaseSettingsHandler implements SettingsStore
      * Determine whether the key is already exists.
      *
      * @param string $key
+     *
      * @return bool
      */
     public function has($key)
     {
-        return ! ! $this->instance($key);
+        return (bool) $this->instance($key);
     }
 
     /**
      * Delete the given key from storage.
      *
      * @param string $key
+     *
      * @return $this
      */
     public function delete($key)
     {
         if ($this->instance($key)) {
-            Cache::forget("settings");
+            Cache::forget('settings');
 
             $this->instance($key)->delete();
 
