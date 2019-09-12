@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Laraeast\LaravelSettings\Contracts\SettingsStore locale($locale = null)
- * @method static \Laraeast\LaravelSettings\Models\Setting set($key, $value)
+ * @method static \Laraeast\LaravelSettings\Models\Setting set($key, $value = null)
  * @method static mixed get($key, $default = null)
  * @method static bool has($key)
  * @method static \Laraeast\LaravelSettings\Contracts\SettingsStore delete($key)
