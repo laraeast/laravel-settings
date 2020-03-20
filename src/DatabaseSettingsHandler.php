@@ -72,6 +72,22 @@ class DatabaseSettingsHandler implements SettingsStore
 
         return $value;
     }
+    
+    /**
+     * Get all settings
+     *
+     * @return Collection
+     */
+    public function getAll()
+    {
+        $this->fetchSettings();
+                
+        if (!is_null($this->locale)) {
+            return $this->settings->where('locale', $this->locale);
+        }
+        
+        return $this->settings;
+    }
 
     /**
      * Set the settings locale.
