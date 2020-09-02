@@ -3,18 +3,10 @@
 	<a href="https://travis-ci.org/laraeast/laravel-settings">
 		<img src="https://travis-ci.org/laraeast/laravel-settings.svg?branch=master" alt="Travis Build Status">
 	</a>
-	<a href="https://circleci.com/gh/laraeast/laravel-settings">
-		<img src="https://circleci.com/gh/dimsav/laravel-translatable.png?style=shield" alt="Circleci Build Status">
-	</a>
-	<a href="https://packagist.org/packages/laraeast/laravel-settings">
-		<img src="https://poser.pugx.org/laraeast/laravel-settings/d/total.svg" alt="Total Downloads">
-	</a>
-	<a href="https://packagist.org/packages/laraeast/laravel-settings">
-		<img src="https://poser.pugx.org/laraeast/laravel-settings/v/stable.svg" alt="Latest Stable Version">
-	</a>
-	<a href="https://packagist.org/packages/laraeast/laravel-settings">
-		<img src="https://poser.pugx.org/laraeast/laravel-settings/license.svg" alt="License">
-	</a>
+	<a href="https://circleci.com/gh/laraeast/laravel-settings"><img src="https://circleci.com/gh/laraeast/laravel-settings.png?style=shield" alt="Circleci Build Status"></a>
+	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/d/total.svg" alt="Total Downloads"></a>
+	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/v/stable.svg" alt="Latest Stable Version"></a>
+	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/license.svg" alt="License"></a>
 </p>
  
 # Persistent Settings Manager for Laravel
