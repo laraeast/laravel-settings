@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "laravel/framework": "~5.2|^6.0|^7.0"
+        "laravel/framework": "~5.2|^6.0|^7.0|^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0",
-        "mockery/mockery": "^1.2"
+        "orchestra/testbench": "~3.0|~4.0|~5.0|~6.0",
+        "mockery/mockery": "^1.4"
     },
     "autoload": {
         "psr-4": {

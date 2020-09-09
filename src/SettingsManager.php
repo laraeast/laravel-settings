@@ -3,6 +3,7 @@
 namespace Laraeast\LaravelSettings;
 
 use Illuminate\Support\Manager;
+use Illuminate\Support\Facades\Config;
 
 class SettingsManager extends Manager
 {
@@ -13,7 +14,7 @@ class SettingsManager extends Manager
      */
     public function createDatabaseDriver()
     {
-        return new DatabaseSettingsHandler($this->app);
+        return new DatabaseSettingsHandler(app());
     }
 
     /**
@@ -23,7 +24,7 @@ class SettingsManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['laravel-settings.driver'];
+        return Config::get('laravel-settings.driver');
     }
 
     /**
@@ -35,6 +36,6 @@ class SettingsManager extends Manager
      */
     public function setDefaultDriver($name)
     {
-        $this->app['config']['laravel-settings.driver'] = $name;
+        Config::set(['laravel-settings.driver' => $name]);
     }
 }
