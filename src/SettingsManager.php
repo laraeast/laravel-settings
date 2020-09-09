@@ -2,8 +2,8 @@
 
 namespace Laraeast\LaravelSettings;
 
-use Illuminate\Support\Manager;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Manager;
 
 class SettingsManager extends Manager
 {
