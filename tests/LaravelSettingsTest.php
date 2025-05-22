@@ -2,7 +2,6 @@
 
 namespace Laraeast\LaravelSettings\Tests;
 
-use Illuminate\Foundation\Application;
 use Laraeast\LaravelSettings\Facades\Settings;
 use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Providers\SettingsServiceProvider;

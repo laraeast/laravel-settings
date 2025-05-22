@@ -24,8 +24,9 @@ interface SettingsStore
      *
      * @template TDefault
      *
-     * @param string $key
+     * @param string        $key
      * @param TDefault|null $default
+     *
      * @return ($default is null ? Setting : TDefault)
      */
     public function get(string $key, mixed $default = null): mixed;
@@ -35,15 +36,15 @@ interface SettingsStore
      *
      * @template TDefault
      *
-     * @param string $key
+     * @param string        $key
      * @param TDefault|null $default
+     *
      * @return ($default is null ? Setting : TDefault)
      */
     public function instance(string $key, mixed $default = null): mixed;
 
     /**
      * Delete the given key from storage.
-     *
      */
     public function delete(string $key): self;
 
