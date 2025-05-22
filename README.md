@@ -1,4 +1,6 @@
 <p align="center">
+   <a href="https://github.com/laraeast/laravel-settings/actions/workflows/tests.yml"><img src="https://github.com/laraeast/laravel-settings/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+	<a href="https://github.styleci.io/repos/179407016?branch=master"><img src="https://github.styleci.io/repos/179407016/shield?branch=master" alt="StyleCI"></a>
 	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/d/total.svg" alt="Total Downloads"></a>
 	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/v/stable.svg" alt="Latest Stable Version"></a>
 	<a href="https://packagist.org/packages/laraeast/laravel-settings"><img src="https://poser.pugx.org/laraeast/laravel-settings/license.svg" alt="License"></a>
