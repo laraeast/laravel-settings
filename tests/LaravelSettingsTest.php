@@ -2,6 +2,7 @@
 
 namespace Laraeast\LaravelSettings\Tests;
 
+use Illuminate\Foundation\Application;
 use Laraeast\LaravelSettings\Facades\Settings;
 use Laraeast\LaravelSettings\Models\Setting;
 use Laraeast\LaravelSettings\Providers\SettingsServiceProvider;
@@ -10,7 +11,7 @@ use Orchestra\Testbench\TestCase;
 class LaravelSettingsTest extends TestCase
 {
     /**
-     * Setup the test environment.
+     * Set up the test environment.
      */
     protected function setUp(): void
     {
@@ -23,10 +24,6 @@ class LaravelSettingsTest extends TestCase
 
     /**
      * Load package service provider.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
      */
     protected function getPackageProviders($app)
     {
@@ -35,10 +32,6 @@ class LaravelSettingsTest extends TestCase
 
     /**
      * Load package alias.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
      */
     protected function getPackageAliases($app)
     {
@@ -49,10 +42,6 @@ class LaravelSettingsTest extends TestCase
 
     /**
      * Define environment setup.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return void
      */
     protected function getEnvironmentSetUp($app)
     {

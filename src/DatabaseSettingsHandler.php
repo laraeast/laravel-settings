@@ -3,6 +3,7 @@
 namespace Laraeast\LaravelSettings;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Cache;
 use Laraeast\LaravelSettings\Contracts\SettingsStore;
@@ -10,44 +11,19 @@ use Laraeast\LaravelSettings\Models\Setting;
 
 class DatabaseSettingsHandler implements SettingsStore
 {
-    /**
-     * The settings collection.
-     *
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    protected $settings;
+    protected Collection $settings;
 
-    /**
-     * @var string
-     */
-    protected $locale;
+    protected ?string $locale = null;
 
-    /**
-     * @var \Illuminate\Foundation\Application
-     */
-    private $app;
-
-    /**
-     * Create Settings instance.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
-    public function __construct(Application $app)
+    public function __construct(private Application $app)
     {
-        $this->app = $app;
-
         $this->fetchSettings();
     }
 
     /**
      * Set a new settings item.
-     *
-     * @param $key
-     * @param null $value
-     *
-     * @return \Laraeast\LaravelSettings\Models\Setting
      */
-    public function set($key, $value = null)
+    public function set(string $key, mixed $value = null): Setting
     {
         Cache::forget('settings');
 
@@ -56,12 +32,12 @@ class DatabaseSettingsHandler implements SettingsStore
         $model = $this->getModelClassName();
 
         $model::updateOrCreate([
-            'key'    => $key,
+            'key' => $key,
             'locale' => $this->locale,
         ], [
-            'key'    => $key,
+            'key' => $key,
             'locale' => $this->locale,
-            'value'  => serialize($value),
+            'value' => serialize($value),
         ]);
 
         $this->fetchSettings();
@@ -75,12 +51,8 @@ class DatabaseSettingsHandler implements SettingsStore
 
     /**
      * Set the settings locale.
-     *
-     * @param null $locale
-     *
-     * @return $this
      */
-    public function locale($locale = null)
+    public function locale(?string $locale = null): self
     {
         $this->locale = $locale ?: $this->app->getLocale();
 
@@ -90,12 +62,13 @@ class DatabaseSettingsHandler implements SettingsStore
     /**
      * Get the given item.
      *
-     * @param $key
-     * @param null $default
+     * @template TDefault
      *
-     * @return mixed
+     * @param string $key
+     * @param TDefault|null $default
+     * @return ($default is null ? Setting : TDefault)
      */
-    public function get($key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         $instance = $this->instance($key);
 
@@ -106,10 +79,8 @@ class DatabaseSettingsHandler implements SettingsStore
 
     /**
      * Fetch the settings collection.
-     *
-     * @return void
      */
-    private function fetchSettings()
+    private function fetchSettings(): void
     {
         $model = $this->getModelClassName();
 
@@ -131,12 +102,13 @@ class DatabaseSettingsHandler implements SettingsStore
     /**
      * Get the settings row.
      *
-     * @param $key
-     * @param null $default
+     * @template TDefault
      *
-     * @return mixed
+     * @param string $key
+     * @param TDefault|null $default
+     * @return ($default is null ? Setting : TDefault)
      */
-    public function instance($key, $default = null)
+    public function instance(string $key, mixed $default = null): mixed
     {
         $this->supportLocaledKey($key);
 
@@ -146,24 +118,16 @@ class DatabaseSettingsHandler implements SettingsStore
 
     /**
      * Determine whether the key is already exists.
-     *
-     * @param string $key
-     *
-     * @return bool
      */
-    public function has($key)
+    public function has(string $key): bool
     {
-        return (bool) $this->instance($key);
+        return (bool)$this->instance($key);
     }
 
     /**
      * Delete the given key from storage.
-     *
-     * @param string $key
-     *
-     * @return $this
      */
-    public function delete($key)
+    public function delete(string $key): self
     {
         if ($this->instance($key)) {
             Cache::forget('settings');
@@ -178,12 +142,10 @@ class DatabaseSettingsHandler implements SettingsStore
 
     /**
      * Update locale if the key has the language.
-     *
-     * @param $key
      */
-    private function supportLocaledKey(&$key)
+    private function supportLocaledKey(string &$key): void
     {
-        if (strpos($key, ':') !== false) {
+        if (str_contains($key, ':')) {
             $this->locale(explode(':', $key)[1]);
             $key = explode(':', $key)[0];
         }
@@ -192,9 +154,9 @@ class DatabaseSettingsHandler implements SettingsStore
     /**
      * The model class name.
      *
-     * @return string
+     * @return class-string<Setting>
      */
-    private function getModelClassName()
+    private function getModelClassName(): string
     {
         $model = $this->app['config']->get('laravel-settings.model_class');
 

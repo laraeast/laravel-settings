@@ -9,18 +9,14 @@ class SettingsManager extends Manager
 {
     /**
      * Create an instance of the database settings driver.
-     *
-     * @return \Laraeast\LaravelSettings\DatabaseSettingsHandler
      */
-    public function createDatabaseDriver()
+    public function createDatabaseDriver(): DatabaseSettingsHandler
     {
         return new DatabaseSettingsHandler(app());
     }
 
     /**
      * Get the default driver name.
-     *
-     * @return string
      */
     public function getDefaultDriver()
     {
@@ -29,12 +25,8 @@ class SettingsManager extends Manager
 
     /**
      * Set the default driver name.
-     *
-     * @param string $name
-     *
-     * @return void
      */
-    public function setDefaultDriver($name)
+    public function setDefaultDriver(string $name): void
     {
         Config::set(['laravel-settings.driver' => $name]);
     }

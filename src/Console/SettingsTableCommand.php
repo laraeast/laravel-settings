@@ -23,39 +23,21 @@ class SettingsTableCommand extends Command
     protected $description = 'Create a migration for the settings database table';
 
     /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
-    /**
-     * @var \Illuminate\Support\Composer
-     */
-    protected $composer;
-
-    /**
      * Create a new settings table command instance.
-     *
-     * @param \Illuminate\Filesystem\Filesystem $files
-     * @param \Illuminate\Support\Composer      $composer
-     *
-     * @return void
      */
-    public function __construct(Filesystem $files, Composer $composer)
-    {
+    public function __construct(
+        protected Filesystem $files,
+        protected Composer $composer,
+    ) {
         parent::__construct();
-
-        $this->files = $files;
-        $this->composer = $composer;
     }
 
     /**
      * Execute the console command.
      *
-     * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function handle()
+    public function handle(): void
     {
         $fullPath = $this->createBaseMigration();
 
@@ -68,10 +50,8 @@ class SettingsTableCommand extends Command
 
     /**
      * Create a base migration file for the session.
-     *
-     * @return string
      */
-    protected function createBaseMigration()
+    protected function createBaseMigration(): string
     {
         $name = 'create_settings_table';
 

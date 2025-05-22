@@ -3,6 +3,7 @@
 namespace Laraeast\LaravelSettings\Contracts;
 
 use Illuminate\Foundation\Application;
+use Laraeast\LaravelSettings\Models\Setting;
 
 interface SettingsStore
 {
@@ -15,42 +16,36 @@ interface SettingsStore
 
     /**
      * Set a new settings item.
-     *
-     * @param $key
-     * @param null $value
-     *
-     * @return $this
      */
-    public function set($key, $value = null);
+    public function set(string $key, mixed $value = null): Setting;
 
     /**
      * Get the given item.
      *
-     * @param $key
-     * @param null $default
+     * @template TDefault
      *
-     * @return mixed
+     * @param string $key
+     * @param TDefault|null $default
+     * @return ($default is null ? Setting : TDefault)
      */
-    public function get($key, $default = null);
+    public function get(string $key, mixed $default = null): mixed;
 
     /**
      * Get the settings row.
      *
-     * @param $key
-     * @param null $default
+     * @template TDefault
      *
-     * @return mixed
+     * @param string $key
+     * @param TDefault|null $default
+     * @return ($default is null ? Setting : TDefault)
      */
-    public function instance($key, $default = null);
+    public function instance(string $key, mixed $default = null): mixed;
 
     /**
      * Delete the given key from storage.
      *
-     * @param string $key
-     *
-     * @return $this
      */
-    public function delete($key);
+    public function delete(string $key): self;
 
     /**
      * Determine whether the key is already exists.
@@ -59,14 +54,10 @@ interface SettingsStore
      *
      * @return bool
      */
-    public function has($key);
+    public function has(string $key): bool;
 
     /**
      * Set the settings locale.
-     *
-     * @param null $locale
-     *
-     * @return $this
      */
-    public function locale($locale);
+    public function locale(?string $locale = null): self;
 }
