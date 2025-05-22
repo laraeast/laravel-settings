@@ -32,12 +32,12 @@ class DatabaseSettingsHandler implements SettingsStore
         $model = $this->getModelClassName();
 
         $model::updateOrCreate([
-            'key' => $key,
+            'key'    => $key,
             'locale' => $this->locale,
         ], [
-            'key' => $key,
+            'key'    => $key,
             'locale' => $this->locale,
-            'value' => serialize($value),
+            'value'  => serialize($value),
         ]);
 
         $this->fetchSettings();
@@ -64,8 +64,9 @@ class DatabaseSettingsHandler implements SettingsStore
      *
      * @template TDefault
      *
-     * @param string $key
+     * @param string        $key
      * @param TDefault|null $default
+     *
      * @return ($default is null ? Setting : TDefault)
      */
     public function get(string $key, mixed $default = null): mixed
@@ -104,8 +105,9 @@ class DatabaseSettingsHandler implements SettingsStore
      *
      * @template TDefault
      *
-     * @param string $key
+     * @param string        $key
      * @param TDefault|null $default
+     *
      * @return ($default is null ? Setting : TDefault)
      */
     public function instance(string $key, mixed $default = null): mixed
@@ -121,7 +123,7 @@ class DatabaseSettingsHandler implements SettingsStore
      */
     public function has(string $key): bool
     {
-        return (bool)$this->instance($key);
+        return (bool) $this->instance($key);
     }
 
     /**
