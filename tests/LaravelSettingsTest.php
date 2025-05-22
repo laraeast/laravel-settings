@@ -65,8 +65,7 @@ class LaravelSettingsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_can_set_and_get_data()
+    public function test_it_can_set_and_get_data()
     {
         Settings::set('name', 'Ahmed Fathy');
         Settings::set('phone', '021207687151');
@@ -74,14 +73,12 @@ class LaravelSettingsTest extends TestCase
         $this->assertEquals(Settings::get('name'), 'Ahmed Fathy');
     }
 
-    /** @test */
-    public function it_returns_default_value_if_the_key_does_not_exists()
+    public function test_it_returns_default_value_if_the_key_does_not_exists()
     {
         $this->assertEquals(Settings::get('UndefindKey', 'FooBar'), 'FooBar');
     }
 
-    /** @test */
-    public function it_returns_unique_value_of_localed_data()
+    public function test_it_returns_unique_value_of_localed_data()
     {
         Settings::locale('en')->set('language', 'English');
         Settings::locale('ar')->set('language', 'Arabic');
@@ -99,8 +96,7 @@ class LaravelSettingsTest extends TestCase
         $this->assertEquals(Setting::where(['locale' => 'en', 'key' => 'language'])->count(), 1);
     }
 
-    /** @test */
-    public function it_determine_if_the_value_exists()
+    public function test_it_determine_if_the_value_exists()
     {
         Settings::set('name', 'Ahmed');
         $this->assertTrue(Settings::has('name'));
@@ -109,8 +105,7 @@ class LaravelSettingsTest extends TestCase
         $this->assertTrue(Settings::has('language:en'));
     }
 
-    /** @test */
-    public function it_can_deleted_the_specific_key()
+    public function test_it_can_deleted_the_specific_key()
     {
         Settings::set('name', 'Ahmed');
         $this->assertTrue(Settings::has('name'));
@@ -139,8 +134,7 @@ class LaravelSettingsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_returns_model_after_set_value()
+    public function test_it_returns_model_after_set_value()
     {
         $this->assertInstanceOf(Setting::class, Settings::set('foo', 'bar'));
     }
